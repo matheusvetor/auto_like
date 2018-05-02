@@ -8,3 +8,11 @@ gem 'json'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'tty-prompt'
+
+gem 'brakeman', require: false
+gem 'guard-brakeman'
+gem 'rspec'
+gem 'simplecov', require: false
+gem 'webmock'
+gem 'timecop'
+gem 'vcr'
