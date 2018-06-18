@@ -3,7 +3,9 @@ require 'mechanize'
 require 'faraday'
 require 'faraday_middleware'
 require 'json'
-require 'tty-prompt'
+require 'dotenv'
+
+Dotenv.load
 
 puts <<eos
 ┌────────────────────────────────────────────────────────────────────┐
@@ -19,12 +21,11 @@ eos
 # CONFIGURATION
 # -------------
 
-prompt          = TTY::Prompt.new
-my_login        = prompt.ask  "What's your email?"
-my_password     = prompt.mask "Enter your password"
-age_filter_min  = prompt.ask  "Please set minimum age you want to like", convert: :int
-age_filter_max  = prompt.ask  "Please set maximum age you want to like", convert: :int
-distance_filter = prompt.ask  "Please set distance as Mile, max: 100",   convert: :int
+my_login        = ENV['FB_EMAIL']
+my_password     = ENV['FB_PASSWORD']
+age_filter_min  = ENV['AGE_FILTER_MIN']
+age_filter_max  = ENV['AGE_FILTER_MAX']
+distance_filter = ENV['DISTANCE_FILTER']
 
 puts '==== FACEBOOK ===='
 puts '* Fetching Facebook data...'
@@ -58,7 +59,7 @@ end
 conn.headers['User-Agent'] = "Tinder/4.0.9 (iPhone; iOS 8.1.1; Scale/2.00)"
 puts '  - Fetching your Tinder token...'
 # Authentication, the point is to get your Tinder token
-rsp = conn.post '/auth', { facebook_token: fb_token}
+rsp = conn.post '/auth', { facebook_token: fb_token }
 jrsp = JSON.parse(rsp.body)
 token = jrsp["token"]
 
@@ -95,10 +96,6 @@ begin
       jrsp = JSON.parse(rsp.body)
     end
   end
-  puts '========= DONE! =========='
-  puts 'Below are the targets you just liked.'
-  puts targets
-  puts '======== EXIT... ========='
 rescue IOError
 ensure
   fileTargets.close unless fileTargets == nil

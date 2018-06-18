@@ -7,7 +7,7 @@ gem 'mechanize'
 gem 'json'
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'tty-prompt'
+gem 'dotenv'
 
 gem 'brakeman', require: false
 gem 'guard-brakeman'
