@@ -99,5 +99,5 @@ begin
   end
 rescue IOError
 ensure
-  file_targets.close unless fileTargets == nil
+  file_targets.close unless file_targets == nil
 end

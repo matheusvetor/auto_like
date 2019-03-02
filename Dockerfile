@@ -16,7 +16,6 @@ ENV BUNDLE_PATH=/bundle \
     GEM_HOME=/bundle
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
-RUN gem install bundler:2.0.1
 RUN bundle install
 
 ADD . $app
