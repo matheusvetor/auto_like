@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  script:
+    build: .
+    command: ruby lib/auto_like.rb
+    volumes:
+      - bundle_cache:/bundle
+      - .:/app
+    environment:
+      - REDIS_HOST=redis://redis:6379/0
+      - TZ=America/Sao_Paulo
+    env_file:
+      - .env
+
+volumes:
+  bundle_cache:
