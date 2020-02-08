@@ -87,7 +87,6 @@ begin
     while(!jrsp['results'].nil?)
       puts '======== LIKING... ========='
       jrsp["results"].each do |target|
-        sleep(1)
         targets.push(target["_id"])
         file_targets.write(target["_id"]+"\n")
         trsp = conn.get 'like/'+target["_id"]
